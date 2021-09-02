@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Metamask Connection</title>
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <div class="main-content">
+            <div>
+                <img src='/img/metamask.svg'>
+                <h1 id="title">{{title}}</h1>
+                <br/>   
+                <p>{{description}}</p>
+            </div>
+            <br/>
+            <h3 id="subtitle">Status</h3>
+            <hr/>
+            <div>
+                <p>Network ID: <span id="networkId"></span></p>
+                <p>Chain ID: <span id="chainId"></span></p>
+                <p>Account: <span id="accountId"></span></p>
+                <p>Balance: <span id="balance"></span></p>
+            </div>
+            <button id="connectToWallet">Connect to Metamask</button>
+        </div>
+        
+        <script type="module" src="/js/app.js"></script>
+        <script type="module" src="/js/ethers-5.1.esm.min.js"></script>
+    </body>
+</html>
