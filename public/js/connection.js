@@ -3,13 +3,13 @@ import { ethers } from './ethers-5.1.esm.min.js'
 const provider = await new ethers.providers.Web3Provider(window.ethereum, 'any')
 const signer = provider.getSigner()
 
-// check if metamask is installed
+// function to check if metamask is installed
 var isMetamaskInstalled = () => ethereum.isMetamaskInstalled
 
-// check if metamask is connected
+// function to check if metamask is connected
 var isMetamaskConnected = () => ethereum.isConnected()
 
-// enable metamask if its disconnected
+// function to enable metamask if its disconnected
 const enableMetamask = async () => {
     await ethereum.on('connect', (chainId) => {
         console.log({ chainId })
@@ -17,17 +17,17 @@ const enableMetamask = async () => {
     })
 }
 
-// get metamask chainID
+// function to get metamask chainID
 const getChainId = async () => {
     return await ethereum.request({method: 'eth_chainId'})
 }
 
-// get metamask networkId
+// function to get metamask networkId
 const getNetworkId = async () => {
     return await ethereum.request({method: 'net_version'})
 }
 
-// get metamask account connected with dapp
+// function to get metamask account connected with dapp
 const getAccount = async () => {
     try {
         let account = await ethereum.request({method: 'eth_accounts'})
@@ -38,7 +38,7 @@ const getAccount = async () => {
     }
 }
 
-// request metamask to connect with account
+// function to request metamask to connect with account
 const connectToAccount = async () => {
     try {
         let account = await ethereum.request({method: 'eth_requestAccounts'})
@@ -49,6 +49,7 @@ const connectToAccount = async () => {
     }
 }
 
+// function to get the balance of the connected account
 const getBalance = async () => {
     try {
         let account = await getAccount()
