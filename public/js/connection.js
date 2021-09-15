@@ -6,16 +6,16 @@ const signer = provider.getSigner()
 // function to check if metamask is installed
 var isMetamaskInstalled = () => ethereum.isMetamaskInstalled
 
-// function to check if metamask is connected
+// function to check if metamask is connected to the current chain
 var isMetamaskConnected = () => ethereum.isConnected()
 
 // function to enable metamask if its disconnected
-const enableMetamask = async () => {
-    await ethereum.on('connect', (chainId) => {
-        console.log({ chainId })
-        console.log('Metamask Connected:', ethereum.isConnected())
-    })
-}
+// const enableMetamask = async () => {
+//     await ethereum.on('connect', (chainId) => {
+//         console.log({ chainId })
+//         console.log('Metamask Connected:', ethereum.isConnected())
+//     })
+// }
 
 // function to get metamask chainID
 const getChainId = async () => {

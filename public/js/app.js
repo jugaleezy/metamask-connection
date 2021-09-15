@@ -16,36 +16,52 @@ else {
     alert('Install Metamask extension to connect with DApp!')
 }
 
-// check if metamask is connected with dapp 
-if (metamaskConfig.isMetamaskConnected) {
+// if metamask is connected do this
+if (metamaskConfig.isMetamaskConnected()) {
     ethereum.autoRefreshOnNetworkChange = false
     network.innerHTML = await metamaskConfig.getNetworkId()
     chainId.innerHTML = await metamaskConfig.getChainId()
     await metamaskConfig.connectToAccount()
     console.log('Metamask connected:', await metamaskConfig.isMetamaskConnected())
 } else {
-    metamaskConfig.enableMetamask()
+    alert('Connect to available ethereum network!')
+    console.log('Connect to available ethereum network!')
 }
 
+// event triggered when account is changed in metamask
 ethereum.on('accountsChanged', async (accounts) => {
     console.log('Account changed from', account)
     account.innerHTML = await metamaskConfig.getAccount()
     balance.innerHTML = await metamaskConfig.getBalance()
 })
 
+// event triggered when metamask is connected to chain and can make rpc request
+ethereum.on('connect', (chainId) => {
+    console.log(chainId)
+    console.log('Metamask Connected:', ethereum.isConnected())
+})
+
+// event triggered when metamask is disconnected from chain and can not make rpc request
+ethereum.on('disconnect', (chainId) => {
+    console.log(chainId)
+    console.log('Metamask Connected:', ethereum.isConnected())
+    alert('Metamask is not connected to ethereum network. Retry!')
+})
+
+// add click event listener on the connect button
 connect.addEventListener('click', async (e) => {
     e.preventDefault()
 
-    let getAccount = await metamaskConfig.getAccount()
-    if (getAccount.length < 1) {
-        getAccount = await metamaskConfig.connectToAccount()
-        account.innerHTML = getAccount
+    let getAccountAddress = await metamaskConfig.getAccount()
+    if (getAccountAddress.length < 1) {
+        getAccountAddress = await metamaskConfig.connectToAccount()
+        account.innerHTML = getAccountAddress
         balance.innerHTML = await metamaskConfig.getBalance()
     } else {
-        account.innerHTML = getAccount
+        account.innerHTML = getAccountAddress
         balance.innerHTML = await metamaskConfig.getBalance()
     }
-    console.log(getAccount)
+    console.log(getAccountAddress)
 })
 
 
