@@ -17,16 +17,20 @@ else {
 }
 
 // if metamask is connected do this
-if (metamaskConfig.isMetamaskConnected()) {
-    ethereum.autoRefreshOnNetworkChange = false
-    network.innerHTML = await metamaskConfig.getNetworkId()
-    chainId.innerHTML = await metamaskConfig.getChainId()
-    await metamaskConfig.connectToAccount()
-    console.log('Metamask connected:', await metamaskConfig.isMetamaskConnected())
-} else {
-    alert('Connect to available ethereum network!')
-    console.log('Connect to available ethereum network!')
+const checkOnLoad = async () => {
+    if (metamaskConfig.isMetamaskConnected) {
+        ethereum.autoRefreshOnNetworkChange = false
+        network.innerHTML = await metamaskConfig.getNetworkId()
+        chainId.innerHTML = await metamaskConfig.getChainId()
+        await metamaskConfig.connectToAccount()
+        console.log('Metamask connected:', await metamaskConfig.isMetamaskConnected())
+    } else {
+        alert('Connect to available ethereum network!')
+        console.log('Connect to available ethereum network!')
+    }
 }
+
+checkOnLoad()
 
 // event triggered when account is changed in metamask
 ethereum.on('accountsChanged', async (accounts) => {

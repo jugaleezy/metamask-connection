@@ -1,6 +1,6 @@
 import { ethers } from './ethers-5.1.esm.min.js'
 
-const provider = await new ethers.providers.Web3Provider(window.ethereum, 'any')
+const provider = new ethers.providers.Web3Provider(window.ethereum, 'any')
 const signer = provider.getSigner()
 
 // function to check if metamask is installed
@@ -69,7 +69,6 @@ export default {
     signer,
     isMetamaskInstalled,
     isMetamaskConnected,
-    enableMetamask,
     getChainId,
     getNetworkId,
     getAccount,
